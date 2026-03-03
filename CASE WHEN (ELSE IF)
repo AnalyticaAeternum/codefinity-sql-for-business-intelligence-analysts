@@ -1,0 +1,7 @@
+SELECT order_id,
+       CASE
+           WHEN total_amount > 200 THEN 'VIP'
+           WHEN total_amount > 100 THEN 'High'
+           ELSE 'Standard'
+       END AS order_tier
+FROM orders;
