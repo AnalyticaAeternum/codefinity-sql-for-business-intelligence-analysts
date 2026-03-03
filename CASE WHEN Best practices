@@ -1,0 +1,10 @@
+To use CASE WHEN with aggregation functions effectively, follow these best practices:
+
+Always return a value or NULL from the CASE WHEN expression, depending on what you want to count or sum;
+
+Use COUNT(CASE WHEN condition THEN 1 END) to count only rows matching a condition;
+
+Use SUM(CASE WHEN condition THEN value ELSE 0 END) to total values only for specific cases;
+
+Use AVG(CASE WHEN condition THEN value END) to average values conditionally, ignoring NULL results;
+
