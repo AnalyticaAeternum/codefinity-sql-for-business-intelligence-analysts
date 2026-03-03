@@ -1,0 +1,44 @@
+
+/* As you move deeper into business intelligence analytics, 
+advanced window function patterns like LAG(), LEAD(), and PERCENT_RANK() allow you 
+to uncover trends, compare periods, and evaluate performance in new ways. 
+These functions help you go beyond simple aggregations and rankings, offering 
+richer insights into your business data.
+
+By using the LAG() function, you can compare each day's sales to the previous day's sales. 
+This lets you analyze trends such as whether sales are increasing, decreasing, or remaining 
+steady over time. For example, you might quickly spot a drop in sales on a particular date,
+prompting further investigation into possible causes.
+
+Note
+
+*/
+SELECT
+  d.date,
+  s.amount AS sales,
+  LAG(s.amount) OVER (ORDER BY d.date) AS previous_sales
+FROM
+  sales s
+  JOIN dates d ON s.sale_date_id = d.date_id
+ORDER BY
+  d.date;
+
+
+/*Using PERCENT_RANK() helps you evaluate employee performance by showing each 
+employee's relative standing among their peers. A percentile rank close to 1 
+means the employee is among the top performers, while a value near 0 indicates 
+a lower rank. This can be useful for identifying high achievers or employees 
+who may need additional support.
+
+You can combine multiple window functions in a single query to build comprehensive 
+business reports. For instance, using both LAG() and PERCENT_RANK() together allows
+you to see not only how an employee's performance compares to others, but also how
+it has changed over time. This approach provides a more complete view of trends and 
+rankings, supporting better decision-making.*/
+
+SELECT
+  ep.employee_id,
+  ep.sales_achieved AS sales,
+  PERCENT_RANK() OVER (ORDER BY ep.sales_achieved) AS percentile
+FROM
+  employee_performance ep;
